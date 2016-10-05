@@ -1,0 +1,18 @@
+<h1>Hello World from Angular</h1>
+<div><span>Controller says: {{vm.message}}</span></div>
+
+<button class='btn btn-success' ng-click='vm.doIt()'>Click It!</button>
+<button class='btn btn-warning' ng-click='vm.addShape()'>Add Shape</button>
+
+<div ui-canvas width="{{vm.width}}" height="{{vm.height}}" stroke-style="#FF0000">
+    <ui-shape ng-repeat="s in vm.shapes track by $index" x="{{s.x}}" y="{{s.y}}" shape-options="s.options" shape-type="{{s.type}}" color="{{s.color}}"></ui-shape>
+</div>
+
+
+<!--
+    <ui-shape x="23" y="10" type="rect" color="#FF0000"></ui-shape>
+    <ui-shape x="15" y="22" type="rect" shape-options="{width: 20, height: 20}" color="#FF0000"></ui-shape>
+    <ui-shape color="#FF0000"></ui-shape>
+-->
+
+<a ui-sref="About">About</a>
