@@ -1,2 +1,27 @@
 @import "bootstrap/less/bootstrap.less";
 @import "font-awesome/font-awesome.less";
+
+@puzzleContainerColor : rgb(136, 136, 136);
+@topBufferMargin : 20px;
+@infoColor: #888888;
+@warningColor: orange;
+
+#puzzleContainer {
+    background-color: @puzzleContainerColor;
+}
+
+.top-buffer { margin-top:@topBufferMargin; }
+
+.smaller { font-size: smaller; }
+
+.align-left { text-align: left; }
+.align-right { text-align: right; }
+
+.vcenter {
+    vertical-align: middle;
+    display: inline-block;
+    float: none;
+}
+
+.info-text { color: @infoColor; }
+.warning-text { color: @warningColor; }

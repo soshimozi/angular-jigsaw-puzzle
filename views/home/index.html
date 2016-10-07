@@ -1,18 +1,76 @@
-<h1>Hello World from Angular</h1>
-<div><span>Controller says: {{vm.message}}</span></div>
+<div class="container">
 
-<button class='btn btn-success' ng-click='vm.doIt()'>Click It!</button>
-<button class='btn btn-warning' ng-click='vm.addShape()'>Add Shape</button>
-
-<div ui-canvas width="{{vm.width}}" height="{{vm.height}}" stroke-style="#FF0000">
-    <ui-shape ng-repeat="s in vm.shapes track by $index" x="{{s.x}}" y="{{s.y}}" shape-options="s.options" shape-type="{{s.type}}" color="{{s.color}}"></ui-shape>
+    <div class="row">
+        <div class="col-md-12"><h1>Angular Jigsaw</h1></div>
+    </div>
+    
+    <div class="row top-buffer">
+        <div class="col-md-12">
+            <uib-tabset active="active">
+                <uib-tab index="0" heading="Puzzle">
+                    <div class="container">
+                        <div class="row top-buffer">
+                            <div id="puzzleContainer" ng-style="{width: vm.width + 'px', height: vm.height + 'px'}">
+                                <ng-puzzle ng-if="vm.initialized" data-ng-src="{{vm.src | trusted}}" size="{{vm.width+'x'+vm.height}}" ng-height="{{vm.height}}"></ng-puzzle>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab index="1" heading="Settings">
+                    <div class="container">
+                        <div class="row top-buffer">
+                            <div class="col-md-2 align-right vcenter">
+                                <label>Screen Size:</label>
+                            </div>
+                            <div class="col-md-2 vcenter">
+                                <select ng-options="option.value as option.label for option in vm.screenSizes" ng-model="vm.settings.screenSize"><option value="">---Please select---</option></select>
+                            </div>
+                            <div class="col-md-7 smaller vcenter info-text">
+                                <span>(Screen size determines work area size, which determines puzzle size, which influences the size of the individual pieces)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="row top-buffer">
+                            <div class="col-md-2 align-right vcenter">
+                                <label>Number of Pieces:</label>
+                            </div>
+                            <div class="col-md-2 vcenter">
+                                <input type="text" ng-model="vm.settings.pieces" ui-number-mask="0" >
+                            </div>
+                            <div class="col-md-6 smaller vcenter info-text">
+                                <span>(This number is used as a guide only, restrictions may apply. More pieces = smaller pieces)</span>
+                            </div>
+                        </div>
+                        <div class="row top-buffer">
+                            <div class="col-md-2 align-right vcenter">
+                                <label>Allow Rotation:</label>
+                            </div>
+                            <div class="col-md-2 vcenter">
+                                <input type="checkbox" ng-model="vm.settings.allowRotation">
+                            </div>
+                        </div>
+                        <div class="row top-buffer">
+                            <div class="col-md-2 align-right vcenter">
+                                <label>Image Url:</label>
+                            </div>
+                            <div class="col-md-2 vcenter">
+                                <input type="text" ng-model="vm.settings.imageUrl" >
+                            </div>
+                        </div>
+                        <div class="row top-buffer">
+                            <div class="col-md-2 vcenter align-right">
+                                <button ng-click="vm.createPuzzle()" ng-disabled="vm.settings.imageUrl == null || vm.settings.imageUrl == '' || vm.settings.pieces <= 0 || vm.settings.pieces > 150 || vm.settings.screenSize == null" class="btn btn-primary">Create</button>
+                            </div>
+                            <div class="col-md-8 vcenter warning-text smaller">
+                                <span>Beware: Clicking on the “Create” button will cause the current jigsaw puzzle in the “Puzzle” tab to be replaced. Also, note that the more pieces there are, the longer it will take to generate the jigsaw puzzle, so you might experience a delay.</span>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab index="2" heading="About">
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+    
 </div>
-
-
-<!--
-    <ui-shape x="23" y="10" type="rect" color="#FF0000"></ui-shape>
-    <ui-shape x="15" y="22" type="rect" shape-options="{width: 20, height: 20}" color="#FF0000"></ui-shape>
-    <ui-shape color="#FF0000"></ui-shape>
--->
-
-<a ui-sref="About">About</a>
